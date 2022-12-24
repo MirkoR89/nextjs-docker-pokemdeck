@@ -15,11 +15,11 @@ const pokemonReducer = (state = initialState, action) => {
         case "createPokemon":
             return {
                 ...state,
-                pokemon: [...state, action.payload],
+                pokemon: [...state.pokemon, action.payload],
                 loading: false
             }
 
-        case "updatePlayer":
+        case "updatePokemon":
             return {
                 ...state,
                 updatedData: action.payload,

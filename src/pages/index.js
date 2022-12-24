@@ -1,5 +1,12 @@
-export default function Home() {
+import Pokemon from "../components/Pokemon"
+
+const Home = () => {
+
   return (
-    <div>This is my app</div>
+    <div className="h-full w-full">
+      <Pokemon />
+    </div>
   )
 }
+
+export default Home
