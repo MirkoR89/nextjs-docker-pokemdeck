@@ -16,28 +16,22 @@ const useApiQueries = () => {
 
     const dispatch = useDispatch()
 
-    //Get first 20 pokemon
-    const getPockemon = async () => {
+    const getPokemonData = async () => {
         try {
-            const res = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=30&offset=0")
-            dispatch(getPokemon(res.data.results))
-            setDataScroll({ ...dataScroll, pokemonNum: res.data.count })
-        } catch (err) {
-            if (err.response) {
-                console.log(err.response.data)
-                console.log(err.response.status)
-                console.log(err.response.headers)
-            } else {
-                console.log(`Error: ${err.message}`)
-            }
-        }
-    }
-
-    const getPokemonScroll = async () => {
-        try {
-            const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${dataScroll.perPage}&offset=${dataScroll.offset}`)
-            console.log(res);
-            dispatch(getPokemon([...pokemon, ...res.data.results]))
+            const pokemonList = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${dataScroll.perPage}&offset=${dataScroll.offset}`)
+            let pokemonDetails = pokemonList.data.results?.map(async p => {
+                const pokemon = await axios.get(p.url)
+                return {
+                    id: pokemon.data.id,
+                    name: pokemon.data.name,
+                    base_experience: pokemon.data.base_experience,
+                    image: pokemon.data.sprites.other["official-artwork"].front_default,
+                    abilities: pokemon.data.abilities,
+                    types: pokemon.data.types
+                }
+            })
+            pokemonDetails = (await Promise.all(pokemonDetails)).map((p) => p);
+            dispatch(getPokemon([...pokemon, ...pokemonDetails]))
         } catch (err) {
             if (err.response) {
                 console.log(err.response.data)
@@ -64,11 +58,12 @@ const useApiQueries = () => {
         }
     }
 
+    //to get first 30th pokemon
     useEffect(() => {
-        getPockemon()
+        getPokemonData()
     }, [])
 
-    return { pokemon, dataScroll, setDataScroll, getPockemon, getPokemonScroll, searchPokemon }
+    return { pokemon, dataScroll, setDataScroll, getPokemonData, searchPokemon }
 }
 
 export default useApiQueries
