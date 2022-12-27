@@ -20,14 +20,17 @@ const Pokemon = () => {
     }
 
     return (
-        <div className="bg-slate-100 w-full h-full flex flex-col gap-y-10 items-center p-2">
+        <div className="bg-blue-200 w-full h-full flex flex-col gap-y-10 items-center">
             {
                 !openDeck ?
                     <>
-                        <h1 className="text-6xl font-bold">Pokemon Cards</h1>
-                        <div className="w-full flex items-center justify-around">
-                            <Searchbar getAllPockemon={getAllPockemon} />
+                        <div className="flex flex-col items-center mt-10">
+                            <img src="./pokemon_text.png" alt="pokemon-text" className="h-52" />
+                            <h1 className="text-6xl font-extrabold font-permanent text-white">Cards</h1>
+                        </div>
+                        <div className="w-full flex items-center justify-end mr-96">
                             <ButtonDeck openDeck={openDeck} setOpenDeck={setOpenDeck} />
+                            <Searchbar getAllPockemon={getAllPockemon} />
                         </div>
                         {
                             pokemonFiltered === null ?
@@ -53,7 +56,7 @@ const Pokemon = () => {
                                     }
                                 </div>
                         }
-                        <button onClick={() => window.scroll({ top: 0, left: 0, behavior: 'smooth' })} className="fixed bottom-10 right-10 rounded-full border-2 shadow-sm px-5 py-2 bg-orange-400 font-bold text-white hover:bg-orange-300 focus:outline-none text-3xl transform transition-all duration-150 ease-in-out focus:scale-95 uppercase">
+                        <button onClick={() => window.scroll({ top: 0, left: 0, behavior: 'smooth' })} className="fixed bottom-10 right-10 rounded-full border-2 shadow-sm px-5 py-2 bg-[#2775BB] hover:bg-[#F8C601] font-bold text-white focus:outline-none text-3xl transform transition-all duration-150 ease-in-out focus:scale-95 uppercase">
                             &#x2191;
                         </button>
                     </> :
