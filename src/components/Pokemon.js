@@ -2,6 +2,7 @@ import useApiQueries from "./useApiQueries";
 import InfiniteScroll from "react-infinite-scroll-component";
 import PokemCard from "./PokemCard";
 import { Searchbar } from "./Searchbar";
+import Loader from "./Loader";
 
 const Pokemon = () => {
 
@@ -25,7 +26,7 @@ const Pokemon = () => {
                         next={fetchPokemonScroll}
                         hasMore={dataScroll.hasMore}
                         className={'flex justify-center flex-wrap gap-10 p-3'}
-                        loader={'Loading...'}
+                        loader={<Loader />}
                         endMessage={<div className="font-bold h-10 bg-gradient-to-r from-white via-green-400 to-white text-white flex justify-center items-center"><span>Yay! Tutti i dati sono mostrati</span></div>}
                     >
                         {
