@@ -53,6 +53,9 @@ const Pokemon = () => {
                                     }
                                 </div>
                         }
+                        <button onClick={() => window.scroll({ top: 0, left: 0, behavior: 'smooth' })} className="fixed bottom-10 right-10 rounded-full border-2 shadow-sm px-5 py-2 bg-orange-400 font-bold text-white hover:bg-orange-300 focus:outline-none text-3xl transform transition-all duration-150 ease-in-out focus:scale-95 uppercase">
+                            &#x2191;
+                        </button>
                     </> :
                     <Deck openDeck={openDeck} setOpenDeck={setOpenDeck} />
             }
