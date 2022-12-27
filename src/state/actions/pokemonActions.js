@@ -25,16 +25,9 @@ export const clearFilterPokemon = () => {
     }
 }
 
-export const createPokemon = (pokemon) => {
+export const addCard = (pokemon) => {
     return {
-        type: "createPokemon",
-        payload: pokemon
-    }
-}
-
-export const updatePokemon = (pokemon) => {
-    return {
-        type: "updatePokemon",
+        type: "addCard",
         payload: pokemon
     }
 }

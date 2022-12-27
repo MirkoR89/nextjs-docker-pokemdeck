@@ -11,7 +11,7 @@ const Pokemon = () => {
 
     const { pokemon, pokemonFiltered, dataScroll, setDataScroll, getPokemonData, getAllPockemon } = useApiQueries()
 
-    const [deck, setDeck] = useState(false)
+    const [openDeck, setOpenDeck] = useState(false)
 
     const fetchPokemonScroll = () => {
         getPokemonData()
@@ -22,12 +22,12 @@ const Pokemon = () => {
     return (
         <div className="bg-slate-100 w-full h-full flex flex-col gap-y-10 items-center p-2">
             {
-                !deck ?
+                !openDeck ?
                     <>
                         <h1 className="text-6xl font-bold">Pokemon Cards</h1>
                         <div className="w-full flex items-center justify-around">
                             <Searchbar getAllPockemon={getAllPockemon} />
-                            <ButtonDeck deck={deck} setDeck={setDeck} />
+                            <ButtonDeck openDeck={openDeck} setOpenDeck={setOpenDeck} />
                         </div>
                         {
                             pokemonFiltered === null ?
@@ -54,7 +54,7 @@ const Pokemon = () => {
                                 </div>
                         }
                     </> :
-                    <Deck deck={deck} setDeck={setDeck} />
+                    <Deck openDeck={openDeck} setOpenDeck={setOpenDeck} />
             }
         </div>
     )

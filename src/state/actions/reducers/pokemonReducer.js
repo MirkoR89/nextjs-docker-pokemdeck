@@ -2,6 +2,7 @@ const initialState = {
     pokemon: [],
     allPokemon: [],
     pokemonFiltered: null,
+    deck: [],
     loading: true
 }
 
@@ -40,17 +41,11 @@ const pokemonReducer = (state = initialState, action) => {
                 loading: false
             }
 
-        case "createPokemon":
+        case "addCard":
+            const maxDeck = state.deck.length === 11 && state.deck.shift()
             return {
                 ...state,
-                pokemon: [...state.pokemon, action.payload],
-                loading: false
-            }
-
-        case "updatePokemon":
-            return {
-                ...state,
-                updatedData: action.payload,
+                deck: state.deck.length === 11 ? [...maxDeck, action.payload] : [...state.deck, action.payload],
                 loading: false
             }
 
