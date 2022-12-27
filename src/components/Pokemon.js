@@ -3,11 +3,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import PokemCard from "./PokemCard";
 import { Searchbar } from "./Searchbar";
 import Loader from "./Loader";
+import { useState } from "react";
+import Deck from "./Deck";
+import ButtonDeck from "./ButtonDeck";
 
 const Pokemon = () => {
 
     const { pokemon, pokemonFiltered, dataScroll, setDataScroll, getPokemonData, getAllPockemon } = useApiQueries()
 
+    const [deck, setDeck] = useState(false)
 
     const fetchPokemonScroll = () => {
         getPokemonData()
@@ -16,32 +20,41 @@ const Pokemon = () => {
     }
 
     return (
-        <div className="bg-slate-100 w-full flex flex-col gap-y-10 items-center p-2">
-            <h1 className="text-6xl font-bold">Pokemon Cards</h1>
-            <Searchbar getAllPockemon={getAllPockemon} />
+        <div className="bg-slate-100 w-full h-full flex flex-col gap-y-10 items-center p-2">
             {
-                pokemonFiltered === null ?
-                    <InfiniteScroll
-                        dataLength={pokemon?.length}
-                        next={fetchPokemonScroll}
-                        hasMore={dataScroll.hasMore}
-                        className={'flex justify-center flex-wrap gap-10 p-3'}
-                        loader={<Loader />}
-                        endMessage={<div className="font-bold h-10 bg-gradient-to-r from-white via-green-400 to-white text-white flex justify-center items-center"><span>Yay! Tutti i dati sono mostrati</span></div>}
-                    >
+                !deck ?
+                    <>
+                        <h1 className="text-6xl font-bold">Pokemon Cards</h1>
+                        <div className="w-full flex items-center justify-around">
+                            <Searchbar getAllPockemon={getAllPockemon} />
+                            <ButtonDeck deck={deck} setDeck={setDeck} />
+                        </div>
                         {
-                            pokemon.map(p =>
-                                <PokemCard key={p.id} data={p} />
-                            )
+                            pokemonFiltered === null ?
+                                <InfiniteScroll
+                                    dataLength={pokemon?.length}
+                                    next={fetchPokemonScroll}
+                                    hasMore={dataScroll.hasMore}
+                                    className={'flex justify-center flex-wrap gap-10 p-3'}
+                                    loader={<Loader />}
+                                    endMessage={<div className="font-bold h-10 bg-gradient-to-r from-white via-green-400 to-white text-white flex justify-center items-center"><span>Yay! Tutti i dati sono mostrati</span></div>}
+                                >
+                                    {
+                                        pokemon.map(p =>
+                                            <PokemCard key={p.id} data={p} />
+                                        )
+                                    }
+                                </InfiniteScroll> :
+                                <div className="flex justify-center flex-wrap gap-10 p-3">
+                                    {
+                                        pokemonFiltered?.map(p =>
+                                            <PokemCard key={p.id} data={p} />
+                                        )
+                                    }
+                                </div>
                         }
-                    </InfiniteScroll> :
-                    <div className="flex justify-center flex-wrap gap-10 p-3">
-                        {
-                            pokemonFiltered?.map(p =>
-                                <PokemCard key={p.id} data={p} />
-                            )
-                        }
-                    </div>
+                    </> :
+                    <Deck deck={deck} setDeck={setDeck} />
             }
         </div>
     )

@@ -4,9 +4,13 @@ const PokemCard = ({ data }) => {
         <div className="wrapper bg-gray-400 antialiased text-gray-900 rounded-lg">
             <div>
                 <img src={data.image} alt="pokemon-image" className="w-full object-cover object-center" />
-                <div className="px-4">
+                <div className="relative px-4">
                     <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <div className="mt-1 text-xl font-semibold uppercase leading-tight text-center truncate">{data.name}</div>
+                        <div className="flex justify-center items-center gap-x-5">
+                            <div className="mt-1 text-xl font-semibold uppercase leading-tight text-center truncate">{data.name}</div>
+                            <div className="mt-1 text-xl leading-tight text-center">{data.base_experience}</div>
+                        </div>
+
                         <div className="mt-5 capitalize">
                             <span className="font-semibold mr-2">Abilities</span>
                             {
