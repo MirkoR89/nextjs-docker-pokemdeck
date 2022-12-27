@@ -1,16 +1,30 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addCard } from "../state/actions/pokemonActions"
 
-const PokemCard = ({ data }) => {
+const PokemCard = ({ data, pokemonList, id }) => {
 
     const dispatch = useDispatch()
+    const { deck } = useSelector(state => state.pokemon)
+
+    console.log(id);
+
 
 
     return (
         <div className="wrapper bg-gray-400 antialiased text-gray-900 rounded-lg relative">
             <div>
                 <img src={data.image} alt="pokemon-image" className="w-full object-cover object-center" />
-                <button onClick={() => dispatch(addCard(data))} className="absolute right-2 top-2 rounded-full border-2 shadow-sm px-3.5 py-1.5 bg-green-400 font-bold text-white hover:bg-green-300 focus:outline-none transform transition-all duration-150 ease-in-out focus:scale-95 uppercase">+</button>
+                {
+                    pokemonList ?
+                        !deck.some(card => card.id === id) ?
+                            <button onClick={() => dispatch(addCard(data))} className="absolute right-2 top-2 rounded-full border-2 shadow-sm px-3.5 py-2 bg-green-400 font-bold text-white hover:bg-green-300 focus:outline-none transform transition-all duration-150 ease-in-out focus:scale-95 uppercase">
+                                &#43;
+                            </button> :
+                            <div className="absolute right-2 top-2 rounded-full border-2 shadow-sm px-3.5 py-2 bg-blue-400 font-bold text-white">
+                                &#10003;
+                            </div> :
+                        <></>
+                }
                 <div className="relative px-4">
                     <div className="bg-white p-6 rounded-lg shadow-lg">
                         <div className="flex justify-center items-center gap-x-5">

@@ -41,14 +41,14 @@ const Pokemon = () => {
                                 >
                                     {
                                         pokemon.map(p =>
-                                            <PokemCard key={p.id} data={p} />
+                                            <PokemCard pokemonList={true} key={p.id} data={p} id={p.id} />
                                         )
                                     }
                                 </InfiniteScroll> :
                                 <div className="flex justify-center flex-wrap gap-10 p-3">
                                     {
                                         pokemonFiltered?.map(p =>
-                                            <PokemCard key={p.id} data={p} />
+                                            <PokemCard pokemonList={true} key={p.id} data={p} id={p.id} />
                                         )
                                     }
                                 </div>
