@@ -10,8 +10,8 @@ const PokemCard = ({ data }) => {
                         <div className="mt-5 capitalize">
                             <span className="font-semibold mr-2">Abilities</span>
                             {
-                                data.abilities.map(ability =>
-                                    <span key={ability.slot} className="text-gray-600 text-sm">{ability.ability.name}</span>
+                                data.abilities?.map((ability, i) =>
+                                    <span key={ability.slot} className="text-gray-600 text-sm capitalize">{ability.ability.name}{data.abilities.length - 1 !== i && ', '}</span>
                                 )
 
                             }
@@ -19,8 +19,8 @@ const PokemCard = ({ data }) => {
                         <div className="mt-1 capitalize">
                             <span className="font-semibold mr-2">Type</span>
                             {
-                                data.types.map((type, index) =>
-                                    <span key={type.slot} className="text-gray-600 text-sm capitalize">{type.type.name} {index < type.type.length - 1 ? ", " : ""}</span>
+                                data.types?.map((type, i) =>
+                                    <span key={type.slot} className="text-gray-600 text-sm capitalize">{type.type.name}{data.types.length - 1 !== i && ', '}</span>
                                 )
                             }
                         </div>
