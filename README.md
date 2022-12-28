@@ -32,3 +32,42 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Start projecet
+
+After downloading the project install all dependency follow the command
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### Start developer mode
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+### Start doker mode
+
+Create a doker container
+
+```bash
+docker build -t nextjs-pokemdeck .
+```
+
+Start the server in the container
+
+```bash
+docker run -p 3000:3000 nextjs-pokemdeck
+```
+
+
+
+
+
+
+
