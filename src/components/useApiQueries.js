@@ -62,7 +62,7 @@ const useApiQueries = () => {
     //to get first 30th pokemon
     useEffect(() => {
         getPokemonData()
-    }, [])
+    }, [getPokemonData])
 
     return { pokemon, pokemonFiltered, dataScroll, setDataScroll, getPokemonData, getAllPockemon }
 }
