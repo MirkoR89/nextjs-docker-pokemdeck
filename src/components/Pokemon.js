@@ -6,6 +6,7 @@ import Loader from "./Loader";
 import { useState } from "react";
 import Deck from "./Deck";
 import ButtonDeck from "./ButtonDeck";
+import Notification from "./Notification";
 
 const Pokemon = () => {
 

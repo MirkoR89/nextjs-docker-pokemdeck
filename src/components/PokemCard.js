@@ -1,10 +1,18 @@
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addCard } from "../state/actions/pokemonActions"
+import Notification from "./Notification"
 
 const PokemCard = ({ data, pokemonList, id }) => {
 
+    const [notification, setNotification] = useState(false)
     const dispatch = useDispatch()
     const { deck } = useSelector(state => state.pokemon)
+
+    const addNewCard = () => {
+        if (deck.some(card => card.id === id)) return setNotification(true)
+        dispatch(addCard(data))
+    }
 
     return (
         <div className="wrapper bg-slate-100 antialiased text-gray-900 rounded-lg relative">
@@ -13,12 +21,12 @@ const PokemCard = ({ data, pokemonList, id }) => {
                 {
                     pokemonList ?
                         !deck.some(card => card.id === id) ?
-                            <button onClick={() => dispatch(addCard(data))} className="absolute right-2 top-2 px-2.5 pb-1.5 rounded-full shadow-sm bg-[#2775BB] font-bold text-white hover:bg-[#F8C601] focus:outline-none transform transition-all duration-150 ease-in-out focus:scale-95 text-2xl">
+                            <button onClick={addNewCard} className="absolute right-2 top-2 px-2.5 pb-1.5 rounded-full shadow-sm bg-[#2775BB] font-bold text-white hover:bg-[#F8C601] focus:outline-none transform transition-all duration-150 ease-in-out focus:scale-95 text-2xl">
                                 <span>&#43;</span>
                             </button> :
-                            <div className="absolute right-2 top-2 rounded-full shadow-sm px-3.5 py-2 bg-[#F8C601] font-bold text-white">
-                                &#10003;
-                            </div> :
+                            <button onClick={addNewCard} className="absolute right-2 top-2 rounded-full shadow-sm px-3.5 py-2 bg-[#F8C601] font-bold text-white">
+                                <span>&#10003;</span>
+                            </button> :
                         <></>
                 }
                 <div className="relative px-4">
@@ -49,8 +57,10 @@ const PokemCard = ({ data, pokemonList, id }) => {
                         </div>
                     </div>
                 </div>
-
             </div>
+            {
+                notification && <Notification setNotification={setNotification} />
+            }
         </div>
     )
 }
