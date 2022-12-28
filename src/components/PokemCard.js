@@ -33,25 +33,25 @@ const PokemCard = ({ data, pokemonList, id }) => {
                     <div className="bg-white p-6 rounded-lg shadow-lg">
                         <div className="mt-1 text-4xl font-semibold uppercase leading-tight text-center truncate text-[#2775BB]">{data.name}</div>
 
-                        <div className="mt-5 capitalize">
-                            <span className="font-semibold mr-2">Base Experience</span>
+                        <div className="mt-5">
+                            <span className="font-semibold mr-2 capitalize">Base Experience</span>
                             <span className="text-gray-600 capitalize">{data.base_experience}</span>
 
                         </div>
-                        <div className="mt-1 capitalize">
-                            <span className="font-semibold mr-2">Abilities</span>
+                        <div className="mt-1 flex space-x-1">
+                            <span className="font-semibold mr-2 capitalize">Abilities</span>
                             {
                                 data.abilities?.map((ability, i) =>
-                                    <span key={ability.slot} className="text-gray-600 capitalize">{ability.ability.name}{data.abilities.length - 1 !== i && ', '}</span>
+                                    <span key={ability.slot} className="text-gray-600 capitalize block">{ability.ability.name}{data.abilities.length - 1 !== i && ', '}</span>
                                 )
 
                             }
                         </div>
-                        <div className="mt-1 capitalize">
+                        <div className="mt-1 flex space-x-1">
                             <span className="font-semibold mr-2">Type</span>
                             {
                                 data.types?.map((type, i) =>
-                                    <span key={type.slot} className="text-gray-600 capitalize">{type.type.name}{data.types.length - 1 !== i && ', '}</span>
+                                    <span key={type.slot} className="text-gray-600 capitalize block">{type.type.name}{data.types.length - 1 !== i && ', '}</span>
                                 )
                             }
                         </div>

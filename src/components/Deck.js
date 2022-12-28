@@ -16,8 +16,8 @@ const Deck = ({ openDeck, setOpenDeck }) => {
         <div className="flex flex-col justify-center items-center gap-y-10">
             <h1 className="text-6xl font-extrabold font-permanent text-white mt-10">My Deck</h1>
             <ButtonDeck pokemon={true} openDeck={openDeck} setOpenDeck={setOpenDeck} />
-            <div className="flex gap-x-1">
-                <span>Base Experice</span>
+            <div className="flex gap-x-1 text-xl">
+                <span className="font-semibold">Total base experience</span>
                 <span>{baseExperience}</span>
             </div>
             <div className="flex justify-center flex-wrap gap-10 p-3">
